@@ -1,14 +1,14 @@
-#Bugged Out App
+# Bugged Out App
 List of reported bugs
 
 ![screenshot](./assets/screenshot/screen.png)
-#Steps to launch the project
+# Steps to launch the project
 ```
 npm install       # install dependencies
 npm start         # run app & lite-server
 ```
 
-#Features
+# Features
 - [x] Routing
     - wildcard
     - router links
