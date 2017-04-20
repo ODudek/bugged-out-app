@@ -14,6 +14,7 @@ var BugListComponent = (function () {
     function BugListComponent(bugService) {
         this.bugService = bugService;
         this.bugs = [];
+        this.dataReceived = false;
     }
     BugListComponent.prototype.ngOnInit = function () {
         this.getAddedBugs();
@@ -24,6 +25,7 @@ var BugListComponent = (function () {
         this.bugService.getAddedBugs()
             .subscribe(function (bug) {
             _this.bugs.push(bug);
+            _this.dataReceived = true;
         }, function (err) {
             console.error('Unable to get added bug - ', err);
         });
@@ -34,6 +36,7 @@ var BugListComponent = (function () {
             .subscribe(function (updatedBug) {
             var bugIndex = _this.bugs.map(function (index) { return index.id; }).indexOf(updatedBug['id']);
             _this.bugs[bugIndex] = updatedBug;
+            _this.dataReceived = true;
         }, function (err) {
             console.error('Unable to get updated bug - ', err);
         });

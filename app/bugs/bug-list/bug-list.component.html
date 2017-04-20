@@ -9,7 +9,11 @@
         </button>
     </div>
 </div>
-<div class="row">
+<div id="indicator" [hidden]="dataReceived">
+    <i class="fa fa-circle-o-notch fa-spin fa-4x fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+</div>
+<div class="row" [class.invisible]="!dataReceived">
     <div class="col-xs-12">
         <table class="table">
             <thead>

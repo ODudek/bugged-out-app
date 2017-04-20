@@ -1,3 +1,16 @@
+#indicator {
+    height: 150px;
+    position: relative;
+}
+
+#indicator i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    margin: 0 0 0 -25%;
+}
+
 h1 {
     margin-bottom: 2rem;
 }
@@ -13,6 +26,10 @@ th, td {
 
 td {
     border-bottom: .5px solid rgba(52, 67, 75, .1);
+}
+
+tr:hover {
+    background-color: rgba(0, 0, 0, .10);
 }
 
 i {

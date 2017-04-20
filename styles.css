@@ -3,7 +3,6 @@ h1 {
 }
 
 .btn {
-    outline: none;
     border-radius: 0;
 }
 
@@ -11,10 +10,18 @@ h1 {
     padding: 1.2rem 3rem;
 }
 
+.btn-danger,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger:active:focus {
+    outline: none;
+}
+
 .btn-success,
 .btn-success:active,
 .btn-success:focus,
 .btn-success:active:focus {
+    outline: none;
     background-color: #A09474;
     border-color: #A09474;
 }
@@ -30,6 +37,7 @@ h1 {
 .btn-primary:active,
 .btn-primary:focus,
 .btn-primary:active:focus {
+    outline: none;
     background-color: #34434B;
     border-color: #34434B;
 }
@@ -37,6 +45,7 @@ h1 {
 .btn-primary:hover,
 .btn-primary:disabled,
 .btn-primary:disabled:hover {
+    outline: none;
     background-color: #3F515A;
     border-color: #3F515A;
 }

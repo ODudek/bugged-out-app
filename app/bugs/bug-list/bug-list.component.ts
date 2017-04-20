@@ -12,6 +12,7 @@ import {Bug} from "../model/bug";
 export class BugListComponent implements OnInit {
 
     private bugs: Bug[] = [];
+    dataReceived = false;
 
     constructor(private bugService: BugService) {
     }
@@ -25,7 +26,7 @@ export class BugListComponent implements OnInit {
         this.bugService.getAddedBugs()
             .subscribe(bug => {
                 this.bugs.push(bug);
-
+                this.dataReceived = true;
             }, err => {
                 console.error('Unable to get added bug - ', err);
             });
@@ -36,6 +37,7 @@ export class BugListComponent implements OnInit {
             .subscribe(updatedBug => {
                 const bugIndex = this.bugs.map(index => index.id).indexOf(updatedBug['id']);
                 this.bugs[bugIndex] = updatedBug;
+                this.dataReceived = true;
             }, err => {
                 console.error('Unable to get updated bug - ', err)
             });

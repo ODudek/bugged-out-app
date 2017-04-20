@@ -17,6 +17,6 @@ npm start         # run app & lite-server
 - [x] Encapsulation
 
 # TODO 
-- [ ] Loader
+- [x] Loader
 - [ ] Button `Delete Bug`
 - [ ] Listener `child_removed`
