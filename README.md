@@ -13,4 +13,10 @@ npm start         # run app & lite-server
     - wildcard
     - router links
 - [x] Firebase
-    - listeners
+    - Listeners
+- [x] Encapsulation
+
+#TODO 
+- [ ] Loader
+- [ ] Button `Delete Bug`
+- [ ] Listener `child_removed`

@@ -20,11 +20,44 @@ var BugService = (function () {
         var _this = this;
         return Observable_1.Observable.create(function (obs) {
             _this.bugDbRef.on('child_added', function (bug) {
-                obs.next(bug.val());
+                var newBug = bug.val();
+                newBug.id = bug.key;
+                obs.next(newBug);
             }, function (err) {
                 obs.throw(err);
             });
         });
+    };
+    BugService.prototype.changeListener = function () {
+        var _this = this;
+        return Observable_1.Observable.create(function (obs) {
+            _this.bugDbRef.on('child_changed', function (bug) {
+                var updateBug = bug.val();
+                updateBug.id = bug.key;
+                obs.next(updateBug);
+            }, function (err) {
+                obs.throw(err);
+            });
+        });
+    };
+    BugService.prototype.addBug = function (bug) {
+        var newBugRef = this.bugDbRef.push();
+        newBugRef.set({
+            title: bug.title,
+            status: bug.status,
+            severity: bug.severity,
+            description: bug.description,
+            createdBy: 'Olek',
+            createdDate: Date.now()
+        })
+            .catch(function (err) { return console.error('Unable to add bug to Firebase - ', err); });
+    };
+    BugService.prototype.updateBug = function (bug) {
+        var currentBugRef = this.bugDbRef.child(bug.id);
+        bug.id = null;
+        bug.updateBy = 'Tom Tickle';
+        bug.updatedDate = Date.now();
+        currentBugRef.update(bug);
     };
     BugService = __decorate([
         core_1.Injectable(), 

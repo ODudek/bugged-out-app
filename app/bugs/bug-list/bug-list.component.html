@@ -3,7 +3,10 @@
         <h1>Logged Bugs</h1>
     </div>
     <div class="col-xs-6 text-xs-right">
-        <button class="btn btn-success btn-lg"><i class="fa fa-plus" aria-hidden="true"></i>Add Bug</button>
+        <button class="btn btn-success btn-lg" [attr.data-target]=" '#' + bugDetail.modalId" data-toggle="modal"
+                (click)="bugDetail.freshForm()">
+            <i class="fa fa-plus" aria-hidden="true"></i>Add Bug
+        </button>
     </div>
 </div>
 <div class="row">
@@ -20,15 +23,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Some bugs</td>
-                <td>Logged</td>
-                <td>Severe</td>
-                <td>This bug happened</td>
-                <td>dudek.olek4</td>
-                <td>12th July 2020</td>
+            <tr *ngFor="let bug of bugs" [attr.data-target]=" '#' + bugDetail.modalId" data-toggle="modal"
+                (click)="bugDetail.configureForm(bug)">
+                <td>{{bug.title}}</td>
+                <td>{{bug.status | status}}</td>
+                <td>{{bug.severity | severity}}</td>
+                <td>{{bug.description}}</td>
+                <td>{{bug.createdBy}}</td>
+                <td>{{bug.createdDate | date }}</td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+<bug-detail #bugDetail></bug-detail>
