@@ -17,6 +17,13 @@ h1 {
     outline: none;
 }
 
+.btn-info,
+.btn-info:focus,
+.btn-info:active,
+.btn-info:active:focus {
+    outline: none;
+}
+
 .btn-success,
 .btn-success:active,
 .btn-success:focus,

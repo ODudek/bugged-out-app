@@ -18,5 +18,5 @@ npm start         # run app & lite-server
 
 # TODO 
 - [x] Loader
-- [ ] Button `Delete Bug`
-- [ ] Listener `child_removed`
+- [x] Button `Delete Bug`
+- [x] Listener `child_removed`

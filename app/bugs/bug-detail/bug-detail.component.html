@@ -30,7 +30,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-danger btn-xl" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger btn-xl" type="submit" data-dismiss="modal" (click)="removeBug()"
+                            [disabled]="!btnToggle">
+                        Remove Bug
+                    </button>
+                    <button class="btn btn-info btn-xl" type="button" data-dismiss="modal"
+                            (click)="btnToggle = false">Cancel
+                    </button>
                     <button class="btn btn-success btn-xl" type="submit" data-dismiss="modal" (click)="submitForm()"
                             [disabled]="bugForm.invalid">
                         Save

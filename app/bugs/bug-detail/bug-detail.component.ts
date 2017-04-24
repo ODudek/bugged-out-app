@@ -13,8 +13,8 @@ import {SEVERITY, STATUS} from "../../shared/constant/constants";
 })
 
 export class BugDetailComponent implements OnInit {
-    private modalId = 'bugModal';
     private bugForm: FormGroup;
+    public btnToggle = false;
     private statuses = STATUS;
     private severitis = SEVERITY;
     private statusArr: string[] = [];
@@ -43,13 +43,19 @@ export class BugDetailComponent implements OnInit {
                 bug.updateBy,
                 bug.updatedDate
             );
+            console.log(bug.id);
+            this.btnToggle = true;
+            console.log(this.btnToggle);
+        } else if (!bug) {
+            this.btnToggle = false;
         }
+        console.log(bug);
         this.bugForm = this.formB.group({
             title: [this.currentBug.title, [Validators.required, forbiddenStringValidator(/puppy/i)]],
             status: [this.currentBug.status, Validators.required],
             severity: [this.currentBug.severity, Validators.required],
             description: [this.currentBug.description, Validators.required]
-        })
+        });
     }
 
     submitForm() {
@@ -59,8 +65,10 @@ export class BugDetailComponent implements OnInit {
         this.currentBug.description = this.bugForm.value['description'];
         if (this.currentBug.id) {
             this.updateBug();
+            this.btnToggle = false;
         } else {
             this.addBug();
+            this.btnToggle = false;
         }
     }
 
@@ -70,6 +78,10 @@ export class BugDetailComponent implements OnInit {
 
     updateBug() {
         this.bugService.updateBug(this.currentBug);
+    }
+
+    removeBug() {
+        this.bugService.removeBug(this.currentBug);
     }
 
     freshForm() {

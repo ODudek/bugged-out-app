@@ -18,7 +18,7 @@ var BugDetailComponent = (function () {
     function BugDetailComponent(formB, bugService) {
         this.formB = formB;
         this.bugService = bugService;
-        this.modalId = 'bugModal';
+        this.btnToggle = false;
         this.statuses = constants_1.STATUS;
         this.severitis = constants_1.SEVERITY;
         this.statusArr = [];
@@ -33,7 +33,14 @@ var BugDetailComponent = (function () {
     BugDetailComponent.prototype.configureForm = function (bug) {
         if (bug) {
             this.currentBug = new bug_1.Bug(bug.id, bug.title, bug.status, bug.severity, bug.description, bug.createdBy, bug.createdDate, bug.updateBy, bug.updatedDate);
+            console.log(bug.id);
+            this.btnToggle = true;
+            console.log(this.btnToggle);
         }
+        else if (!bug) {
+            this.btnToggle = false;
+        }
+        console.log(bug);
         this.bugForm = this.formB.group({
             title: [this.currentBug.title, [forms_1.Validators.required, forbidden_string_validator_1.forbiddenStringValidator(/puppy/i)]],
             status: [this.currentBug.status, forms_1.Validators.required],
@@ -48,9 +55,11 @@ var BugDetailComponent = (function () {
         this.currentBug.description = this.bugForm.value['description'];
         if (this.currentBug.id) {
             this.updateBug();
+            this.btnToggle = false;
         }
         else {
             this.addBug();
+            this.btnToggle = false;
         }
     };
     BugDetailComponent.prototype.addBug = function () {
@@ -58,6 +67,9 @@ var BugDetailComponent = (function () {
     };
     BugDetailComponent.prototype.updateBug = function () {
         this.bugService.updateBug(this.currentBug);
+    };
+    BugDetailComponent.prototype.removeBug = function () {
+        this.bugService.removeBug(this.currentBug);
     };
     BugDetailComponent.prototype.freshForm = function () {
         this.bugForm.reset({ status: this.statuses.Logged, severity: this.severitis.Cosmetic });

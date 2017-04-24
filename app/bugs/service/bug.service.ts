@@ -37,6 +37,19 @@ export class BugService {
         });
     }
 
+    removeListener(): Observable<any> {
+        return Observable.create(obs => {
+            this.bugDbRef.on('child_removed', bug => {
+                const deletedBug = bug.val() as Bug;
+                deletedBug.id = bug.key;
+                obs.next(deletedBug);
+                this.getAddedBugs();
+            }, err => {
+                obs.throw(err);
+            })
+        })
+    }
+
     addBug(bug: Bug) {
         const newBugRef = this.bugDbRef.push();
         newBugRef.set({
@@ -57,4 +70,10 @@ export class BugService {
         bug.updatedDate = Date.now();
         currentBugRef.update(bug);
     }
+
+    removeBug(bug: Bug) {
+        const removeBugRef = this.bugDbRef.child(bug.id);
+        removeBugRef.remove();
+    }
+
 }

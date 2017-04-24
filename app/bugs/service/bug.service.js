@@ -40,6 +40,19 @@ var BugService = (function () {
             });
         });
     };
+    BugService.prototype.removeListener = function () {
+        var _this = this;
+        return Observable_1.Observable.create(function (obs) {
+            _this.bugDbRef.on('child_removed', function (bug) {
+                var deletedBug = bug.val();
+                deletedBug.id = bug.key;
+                obs.next(deletedBug);
+                _this.getAddedBugs();
+            }, function (err) {
+                obs.throw(err);
+            });
+        });
+    };
     BugService.prototype.addBug = function (bug) {
         var newBugRef = this.bugDbRef.push();
         newBugRef.set({
@@ -58,6 +71,10 @@ var BugService = (function () {
         bug.updateBy = 'Tom Tickle';
         bug.updatedDate = Date.now();
         currentBugRef.update(bug);
+    };
+    BugService.prototype.removeBug = function (bug) {
+        var removeBugRef = this.bugDbRef.child(bug.id);
+        removeBugRef.remove();
     };
     BugService = __decorate([
         core_1.Injectable(), 

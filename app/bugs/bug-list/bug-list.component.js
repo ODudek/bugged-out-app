@@ -19,12 +19,24 @@ var BugListComponent = (function () {
     BugListComponent.prototype.ngOnInit = function () {
         this.getAddedBugs();
         this.getUpdateBugs();
+        this.removeBug();
     };
     BugListComponent.prototype.getAddedBugs = function () {
         var _this = this;
         this.bugService.getAddedBugs()
             .subscribe(function (bug) {
             _this.bugs.push(bug);
+            _this.dataReceived = true;
+        }, function (err) {
+            console.error('Unable to get added bug - ', err);
+        });
+    };
+    BugListComponent.prototype.removeBug = function () {
+        var _this = this;
+        this.bugService.removeListener()
+            .subscribe(function (bug) {
+            var bugIndex = _this.bugs.map(function (index) { return index.id; }).indexOf(bug['id']);
+            _this.bugs.splice(bugIndex, 1);
             _this.dataReceived = true;
         }, function (err) {
             console.error('Unable to get added bug - ', err);
